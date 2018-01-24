@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Online shopping</title>
+	<style type="text/css">
+		.menusai {
+    width: 75%;
+    float: left;
+    background: #DCDCDC;
+    height: 100%;
+}
+.mainsai {
+    width: 25%;
+    float: left;
+    height: 100%;
+}
+	</style>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse" style="background: #32CD32;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" style="color: white;" href="#">Online Shopping</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+      <ul class="nav nav-pills navbar-right" style="padding-top: 10px;">
+  <li style="background: #32CD32;"><a href="#" style="color: white;"><i class="material-icons" style="padding-right: 5px;">shopping_cart</i>Cart <span class="badge" style="background: red;" id="ctot">0</span></a></li>
+</ul>
+    </div>
+  </div>
+</nav>
+<div class="menusai">
+	<div class="container-fluid">
+	<div style="padding-top: 10px;">
+	<div class="col-sm-11">
+		</div>
+		<i class="material-icons">list</i>&nbsp;&nbsp;&nbsp;&nbsp;
+		<i class="material-icons">grid_on</i>
+		<br><br></div>
+	<div class="container"  id="roww">
+    </div>
+  	</div>
+  	</div>      
+    <div class="mainsai">
+      <div style="background: white; width: 100%; height: 100%; padding : 20px;">
+      <span style="color : blue; font-size : 20px;">YOUR SHOPPING CART</span>
+      <ul class="list-group" id="cart"> 
+      	</ul>
+      	<h5 id="tot">Total  <span style="color : blue; font-size : 20px;">Rs.0</span></h5></div>
+    </div>
+</body>
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+var totall=0;
+var arrayy = "";
+	function add(j) {
+		var list = document.getElementById('cart');
+		list.innerHTML+='<li class=\"list-group-item\"><span class=\"badge\"><i class=\"material-icons\" onclick=\"removeitem('+j+')\">highlight_off</i></span>'+jsonarr[j].proname+'&nbsp;&nbsp;&nbsp;&nbsp;<b>Rs.'+jsonarr[j].price+'</b></li>';
+		totall=totall+Number(jsonarr[j].price);
+		document.getElementById("tot").innerHTML="Grand total : <span style=\"color : blue; font-size : 30px;\">Rs."+totall+"</span>";
+		document.getElementById("ctot").innerHTML=(arrayy.length+1);
+		arrayy+=j;
+	}
+	function removeitem(j){
+		for(var sai=0;sai<arrayy.length;sai++){
+			if(Number(arrayy.charAt(sai))==j){
+				arrayy=arrayy.replace(arrayy.charAt(sai)+"","");
+			}
+		}
+		document.getElementById("cart").innerHTML="";
+					totall=0;
+		for(var i=0;i<arrayy.length;i++){
+			var sairam=Number(arrayy.charAt(i));
+			document.getElementById("cart").innerHTML+='<li class=\"list-group-item\"><span class=\"badge\"><i class=\"material-icons\" onclick=\"removeitem('+sairam+')\">highlight_off</i></span>'+jsonarr[sairam].proname+'&nbsp;&nbsp;&nbsp;&nbsp;<b>Rs.'+jsonarr[sairam].price+'</b></li>';
+			totall=totall+Number(jsonarr[sairam].price);
+		}
+		document.getElementById("tot").innerHTML="Total  <span style=\"color : blue; font-size : 30px;\">Rs."+totall+"</span>";
+		document.getElementById("ctot").innerHTML=(arrayy.length);
+	}
+	var jsonarr = [
+	{
+		"image" : "images/nike.png",
+		"proname" : "Nike Shoe 1",
+		"tag" : "Men's running shoes 1",
+		"price" : "3000", 
+		"stockk" : "in"
+	},
+	{
+		"image" : "images/nike.png",
+		"proname" : "Nike Shoe 2",
+		"tag" : "Men's running shoes 2",
+		"price" : "4000", 
+		"stockk" : "in" 
+	},
+	{
+		"image" : "images/nike.png",
+		"proname" : "Nike Shoe 3",
+		"tag" : "Men's running shoes 3",
+		"price" : "3500", 
+		"stockk" : "out" 
+	},
+	{
+		"image" : "images/nike.png",
+		"proname" : "Nike Shoe 4",
+		"tag" : "Men's running shoes 4",
+		"price" : "4500", 
+		"stockk" : "in" 
+	},
+	{
+		"image" : "images/nike.png",
+		"proname" : "Nike Shoe 5",
+		"tag" : "Men's running shoes 5",
+		"price" : "5000", 
+		"stockk" : "in" 
+	},
+	{
+		"image" : "images/nike.png",
+		"proname" : "Nike Shoe 6",
+		"tag" : "Men's running shoes 6",
+		"price" : "6500", 
+		"stockk" : "in" 
+	},
+	{
+		"image" : "images/nike.png",
+		"proname" : "Nike Shoe 6",
+		"tag" : "Men's running shoes 6",
+		"price" : "6500", 
+		"stockk" : "in" 
+	}
+	];
+	loadd(jsonarr);
+	function loadd(myarr){
+		for(var i=0;i<myarr.length;i++){
+			if(i==0||i%3==0){
+			document.getElementById("roww").innerHTML+='<div class=\"row\">';
+		}
+		if(myarr[i].stockk=="in"){
+			document.getElementById("roww").innerHTML+='<div class=\"col-sm-3\"><div class=\"panel panel-default\"  style=\"border-radius : 8px;\"><div class=\"panel-body\"><img src=\"'+myarr[i].image+'\" style=\"width: 100%; height: 200px;\"><div class=\"col-sm-7\"><b><span>'+myarr[i].proname+'</span></b></div><div class=\"col-sm-5\"><span style=\"color: #8B4513; background: #FFD700; border-radius: 100px; padding: 4px;\">In Stock</span></div><div class=\"col-sm-11\"><span>'+myarr[i].tag+'</span></div><div class=\"col-sm-11\"><span>Rs.'+myarr[i].price+'</span></div><br><center><button style=\"background: #FFA500; color: white; border: 1px solid #FFA500; border-radius: 100px; padding-left: 40px; padding-right: 40px;\" onclick=\"add('+i+')\">ADD TO CART</button></center></div></div></div>';
+		}else{
+			document.getElementById("roww").innerHTML+='<div class=\"col-sm-3\"><div class=\"panel panel-default\"  style=\"border-radius : 8px;\"><div class=\"panel-body\"><img src=\"'+myarr[i].image+'\" style=\"width: 100%; height: 200px;\"><div class=\"col-sm-7\"><b><span>'+myarr[i].proname+'</span></b></div><div class=\"col-sm-5\"><span style=\"color: white; background: #DCDCDC; border-radius: 100px; padding: 4px;\">No Stock</span></div><div class=\"col-sm-11\"><span>'+myarr[i].tag+'</span></div><div class=\"col-sm-11\"><span>Rs.'+myarr[i].price+'</span></div><br><center><button style=\"background: #DCDCDC; color: white; border: 1px solid #DCDCDC; border-radius: 100px; padding-left: 40px; padding-right: 40px;\" onclick=\"add('+i+')\" disabled>ADD TO CART</button></center></div></div></div>';
+		}
+			if(i==0||i%3==0){
+			document.getElementById("roww").innerHTML+='</div>';
+		}
+		}
+	}
+</script>
+</html>
